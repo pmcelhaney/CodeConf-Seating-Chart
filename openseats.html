@@ -42,15 +42,7 @@ $(function () {
 	var rows = 17;
 	var cols = 21;
 	var i, j;
-	var tr, td, data = [];
-
-	for (i = 0; i < rows; i++) {
-		data[i] = [];
-		for (j = 0; j < cols; j++) {
-			data[i].push(Math.random() > 0.1 ? 'x' : null);
-		}
-	}
-	
+	var tr, td, data;
 
 	
 	for (i = 0; i < rows; i++) {
@@ -78,15 +70,20 @@ $(function () {
 			for (j = 0; j < cols; j++) {
 				if (data[i][j]) {
 					$('table tr').eq(i).find('td').eq(j).addClass('filled');
+				} else {
+					$('table tr').eq(i).find('td').eq(j).removeClass('filled');
 				}
 			}
 
 		}
 	};
-	console.log(data);
+	console.log(JSON.stringify(data));
 	
-	displayData(data);
-
+	
+	setInterval( function () {
+		$.getJSON('data.json', function (d) { data = d; displayData(d); });
+	}, 1000);
+	
 });
 </script>
 
