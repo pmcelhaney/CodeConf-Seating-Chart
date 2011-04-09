@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+<head>
+
+<meta charset="utf-8" />
+<title>GitHub CodeConf 2011 Open Seats</title>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+	
+	var markSeat = function(seat, x, y) {
+		console.log('you clicked ' + x + ',' + y);
+		$(seat).text('X');
+	};
+
+	var rows = 17;
+	var cols = 20;
+	var i, j;
+	var tr;
+	var td;
+	
+	for (i = 0; i < rows; i++) {
+		tr = $('<tr></tr>');
+		for (j = 0; j < cols; j++) {
+			td = $('<td>-</td>').click( (function (x, y) { return function () { markSeat(this, x,y);  }; }(i, j)) );
+			tr.append(td);
+		}
+		
+		$('table').append(tr);
+	}
+
+
+
+});
+</script>
+
+
+</head>
+
+<body>
+
+<h1>GitHub CodeConf 2011 Open Seats</h1>	
+
+
+<table>
+	
+</table>
+
+	
+</body>	
+</html>
