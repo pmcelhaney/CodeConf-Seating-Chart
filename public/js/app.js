@@ -5,7 +5,16 @@ $(function () {
 		console.log(data);
 		console.log('you clicked ' + row + ',' + col);
 		$(seat).addClass('filled');
-        $.get('/update/row/'+row+'/col/'+col+'/mark/taken/');
+        var taken = 'taken';
+        var $seat = $(seat);
+        if( $seat.hasClass('filled') ){
+            taken = 'nottaken';
+            $seat.removeClass('filled');
+        } else {
+            taken = 'taken';
+            $seat.addClass('filled');
+        }
+        $.get('/update/row/'+row+'/col/'+col+'/mark/'+taken+'/');
 	};
 
 	var rows = 17;

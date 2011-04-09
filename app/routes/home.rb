@@ -52,11 +52,11 @@ class Main
   end
 
   get "/update/row/:row/col/:col/mark/:taken[/]?" do
-    seat = Seat.get(:row => params[:row], :col => params[:col])
+    seat = Seat.first(:row => params[:row], :col => params[:col])
     seat.update(:taken => (params[:taken] == 'taken'))
     if seat.save then
-      redirect '/'
-      #"#{request.inspect}"
+      #redirect '/'
+      "#{seat.taken}"
     end
   end
 end
