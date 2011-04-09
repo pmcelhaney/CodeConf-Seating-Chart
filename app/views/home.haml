@@ -1,5 +1,22 @@
+%form{:id => 'mark-seat-form'}
+	%input{:name => 'row', :type => 'text'}
+	%input{:name => 'col', :type => 'text'}
 
-%p
-  Total Seats:
-  = @seats.count
+	%div
+		%input{:name => 'status', :value => 'open', :type => 'radio', :id => 'seat-is-open', :checked => 'checked'}
+		%label{:for => 'seat-is-open'} This seat is open.
+	%div
+		%input{:name => 'status', :value => 'taken', :type => 'radio', :id => 'seat-is-taken'}
+		%label{:for => 'seat-is-taken'} This seat is taken.
+	%div
+		%input{:name => 'status', :value => 'twitter', :type => 'radio', :id => 'seat-is-me'}
+		%label{:for => 'seat-is-me'} This seat is me!
+		%label{:for => 'twitter-username'} Twitter username:
+		%input{:type => 'text', :id => 'twitter-username', :name => 'twitter-username'}
+	%div 
+		%button Save
+	
+	
+	
+
 %table{:id => 'openseats'}

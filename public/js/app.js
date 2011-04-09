@@ -1,14 +1,37 @@
 $(function () {
 
+	
+	$('#mark-seat-form button').bind('click', function () {
+		var value = $('#mark-seat-form input[name=status]:checked')[0].value;
+		var row = $('#mark-seat-form input[name=row]').val();
+		var col = $('#mark-seat-form input[name=col]').val();
+		if (value === 'twitter') {
+			value = $('#mark-seat-form input[name=twitter-username]').val();
+		}
+		
+		var url = '/update/row/'+row+'/col/'+col+'/mark/'+ value +'/';
+		$.get(url, updateFromServer);
+		console.log(url);
+		$('#mark-seat-form').slideUp();
+		return false;
+	});
+
 	var markSeat = function(seat, row, col) {
 		data[row][col] = 'x';
-		//console.log(data);
-		//console.log('you clicked ' + row + ',' + col);
+		var taken = 'taken';
         var $seat = $(seat);
-        var url = '/update/row/'+row+'/col/'+col+'/mark/'+ ( $seat.hasClass('filled') ? 'taken' : 'nottaken' )+'/';
-        console.log(url);
-        $.get(url, updateFromServer);
-	
+		var value = null;
+        if ( $seat.hasClass('filled') ) {
+			value = 'nottaken'; 
+		} else {
+			value = 'taken';
+		}
+ 		
+		$('#mark-seat-form input[name=row]').val(row);
+		$('#mark-seat-form input[name=col]').val(col);
+		$('#mark-seat-form').slideDown();
+
+       
 	};
 
 	var rows = 17;
@@ -37,19 +60,21 @@ $(function () {
 
 
 	var displayData = function (data) {
-		//console.log('receiving update');
+		console.log('receiving update');
 		var i, j;
-
+		var td;
 		for (i = 0; i < rows; i++) {
 			tr = $('<tr></tr>');
 			for (j = 0; j < cols; j++) {
-                if( i == 0 && j == 9 ){
-                    //console.log("i: " + i + " j: " + 9 + " -- " + data[i][j]);
-                }
-				if (data[i][j] != null) {
-					$('table tr').eq(i).find('td').eq(j).addClass('filled');
+				td = $('table tr').eq(i).find('td').eq(j);
+				if (data[i][j]) {
+					td.addClass('filled');
+					if (td.find('img').length === 0) {
+						td.append('<img>');
+					}
+					td.find('img').attr('src', 'https://api.twitter.com/1/users/profile_image/' + data[i][j]);	
 				} else {
-					$('table tr').eq(i).find('td').eq(j).removeClass('filled');
+					td.removeClass('filled').find('img').remove();
 				}
 			}
 
@@ -57,13 +82,14 @@ $(function () {
 	};
 
 	var updateFromServer = function () {
-		//console.log('asking server for update');
+		console.log('asking server for update');
+		
 		$.getJSON('/seats.json', function (d) { data = d; displayData(d); });
 	};
 	
 	
 	updateFromServer();
-	setInterval( updateFromServer, 10000);
+	//setInterval( updateFromServer, 10000);
 
 
 
