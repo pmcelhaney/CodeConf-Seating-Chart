@@ -9,24 +9,59 @@
 <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
 
+
+<style type="text/css" media="screen">
+	td {
+		width: 50px;
+		height: 50px;
+		text-align: center;
+		background-color: orange;
+	}
+	
+	td.filled {
+		background-color: gray;
+	}	
+
+	td.isle {
+		background: none;
+		width: 100px;
+	}
+		
+</style>
+
 <script type="text/javascript" charset="utf-8">
 $(function () {
 	
 	var markSeat = function(seat, x, y) {
+		data[x][y] = 'x';
+		console.log(data);
 		console.log('you clicked ' + x + ',' + y);
-		$(seat).text('X');
+		$(seat).addClass('filled');
 	};
 
 	var rows = 17;
-	var cols = 20;
+	var cols = 21;
 	var i, j;
-	var tr;
-	var td;
+	var tr, td, data = [];
+
+	for (i = 0; i < rows; i++) {
+		data[i] = [];
+		for (j = 0; j < cols; j++) {
+			data[i].push(Math.random() > 0.1 ? 'x' : null);
+		}
+	}
+	
+
 	
 	for (i = 0; i < rows; i++) {
 		tr = $('<tr></tr>');
 		for (j = 0; j < cols; j++) {
-			td = $('<td>-</td>').click( (function (x, y) { return function () { markSeat(this, x,y);  }; }(i, j)) );
+			
+			td = $('<td></td>').click( (function (x, y) { return function () { markSeat(this, x,y);  }; }(i, j)) );
+			if (j === 10) {
+				td.addClass('isle');
+			}
+			
 			tr.append(td);
 		}
 		
@@ -34,6 +69,23 @@ $(function () {
 	}
 
 
+
+	var displayData = function (data) {
+		var i, j;
+		
+		for (i = 0; i < rows; i++) {
+			tr = $('<tr></tr>');
+			for (j = 0; j < cols; j++) {
+				if (data[i][j]) {
+					$('table tr').eq(i).find('td').eq(j).addClass('filled');
+				}
+			}
+
+		}
+	};
+	console.log(data);
+	
+	displayData(data);
 
 });
 </script>
