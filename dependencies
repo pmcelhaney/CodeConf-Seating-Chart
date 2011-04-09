@@ -21,3 +21,4 @@ do_sqlite3 (test, development) git://github.com/datamapper/do.git
 haml https://github.com/nex3/haml.git
 content_for2 https://github.com/Undev/sinatra-content-for2.git
 json https://github.com/flori/json.git
+tilt https://github.com/rtomayko/tilt/

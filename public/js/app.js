@@ -4,7 +4,6 @@ $(function () {
 		data[row][col] = 'x';
 		console.log(data);
 		console.log('you clicked ' + row + ',' + col);
-		$(seat).addClass('filled');
         var taken = 'taken';
         var $seat = $(seat);
         if( $seat.hasClass('filled') ){
@@ -48,7 +47,10 @@ $(function () {
 		for (i = 0; i < rows; i++) {
 			tr = $('<tr></tr>');
 			for (j = 0; j < cols; j++) {
-				if (data[i][j]) {
+                if( i == 0 && j == 9 ){
+                    console.log("i: " + i + " j: " + 9 + " -- " + data[i][j]);
+                }
+				if (data[i][j] == "x") {
 					$('table tr').eq(i).find('td').eq(j).addClass('filled');
 				} else {
 					$('table tr').eq(i).find('td').eq(j).removeClass('filled');
