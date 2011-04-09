@@ -43,7 +43,7 @@ class Main
         currentRow = seat.row
       end
 
-      data[seat.row][seat.col] = seat.taken ? seat.twitter : nil
+      data[seat.row][seat.col] = seat.taken ? "x" : nil
 
     end
 
