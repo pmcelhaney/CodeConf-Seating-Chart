@@ -17,6 +17,7 @@ json git://github.com/genki/json.git
 thor git://github.com/wycats/thor.git
 dm-do-adapter git://github.com/datamapper/dm-do-adapter.git
 dm-sqlite-adapter (test, development) git://github.com/datamapper/dm-sqlite-adapter.git
+dm-timestamps https://github.com/datamapper/dm-timestamps
 do_sqlite3 (test, development) git://github.com/datamapper/do.git
 haml https://github.com/nex3/haml.git
 content_for2 https://github.com/Undev/sinatra-content-for2.git
