@@ -12,6 +12,10 @@ defaults: &defaults
     <<: *defaults
 
 :production:
-  :sqlite3:
-    :database: db/production.sqlite3
+  :postgresql:
+    :database: wykwikptpr
+    :port: 5432
+    :host: ec2-50-17-202-49.compute-1.amazonaws.com
+    :username: wykwikptpr
+    :password: mjFU9U3czhtvB2FufjCN
     <<: *defaults

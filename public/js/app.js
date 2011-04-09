@@ -67,9 +67,10 @@ $(function () {
 			tr = $('<tr></tr>');
 			for (j = 0; j < cols; j++) {
 				td = $('table tr').eq(i).find('td').eq(j);
-				if (data[i][j]) {
+				if (data[i][j] != null) {
 					td.addClass('filled');
-					if (td.find('img').length === 0) {
+					if (data[i][j] !== "x" && td.find('img').length === 0) {
+                        console.log(data[i][j]);
 						td.append('<img>');
 					}
 					td.find('img').attr('src', 'https://api.twitter.com/1/users/profile_image/' + data[i][j]);	

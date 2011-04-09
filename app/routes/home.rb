@@ -43,7 +43,7 @@ class Main
         currentRow = seat.row
       end
 
-      data[seat.row][seat.col] = seat.taken ? "x" : nil
+      data[seat.row][seat.col] = seat.taken ? (seat.twitter ? seat.twitter : "x") : nil
 
     end
 
@@ -53,7 +53,7 @@ class Main
 
   get "/update/row/:row/col/:col/mark/:taken[/]?" do
     seat = Seat.first(:row => params[:row], :col => params[:col])
-    seat.update(:taken => (params[:taken] != 'nottaken'), :twitter => params[:taken], :updated => Time.now)
+    seat.update(:taken => (params[:taken] != 'open'), :twitter => params[:taken], :updated => Time.now)
     if seat.save then
       #redirect '/'
       "#{seat.taken}"
