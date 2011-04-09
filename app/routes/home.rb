@@ -1,7 +1,7 @@
 class Main
   get "/" do
     @seats = Seat.all
-    @title = "Code Conf Seatr"
+    @title = "GitHub CodeConf 2011 Open Seats"
     if @seats.count == 0 then
       redirect '/create'
     end
@@ -51,10 +51,10 @@ class Main
     data.to_json
   end
 
-  get "/update/:id/mark/:taken[/]?" do
-    seat = Seat.get(params[:id])
-    seat.update(:taken => (params[:taken] == 'x'))
-    if request.save then
+  get "/update/row/:row/col/:col/mark/:taken[/]?" do
+    seat = Seat.get(:row => params[:row], :col => params[:col])
+    seat.update(:taken => (params[:taken] == 'taken'))
+    if seat.save then
       redirect '/'
       #"#{request.inspect}"
     end
