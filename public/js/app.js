@@ -1,5 +1,21 @@
 $(function () {
 
+	
+	$('#mark-seat-form button').bind('click', function () {
+		var value = $('#mark-seat-form input[name=status]:checked')[0].value;
+		var row = $('#mark-seat-form input[name=row]').val();
+		var col = $('#mark-seat-form input[name=col]').val();
+		if (value === 'twitter') {
+			value = $('#mark-seat-form input[name=twitter-username]').val();
+		}
+		
+		var url = '/update/row/'+row+'/col/'+col+'/mark/'+ value +'/';
+		$.get(url, updateFromServer);
+		console.log(url);
+		$('#mark-seat-form').slideUp();
+		return false;
+	});
+
 	var markSeat = function(seat, row, col) {
 		data[row][col] = 'x';
 		var taken = 'taken';
@@ -10,9 +26,12 @@ $(function () {
 		} else {
 			value = 'taken';
 		}
- 
-        $.get('/update/row/'+row+'/col/'+col+'/mark/'+ value +'/', updateFromServer);
-	
+ 		
+		$('#mark-seat-form input[name=row]').val(row);
+		$('#mark-seat-form input[name=col]').val(col);
+		$('#mark-seat-form').slideDown();
+
+       
 	};
 
 	var rows = 17;

@@ -18,3 +18,7 @@
     td.seat {
         cursor: pointer;
     }
+
+#mark-seat-form { 
+	display: none;
+}
