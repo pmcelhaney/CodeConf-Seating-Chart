@@ -4,8 +4,14 @@ $(function () {
 		data[row][col] = 'x';
 		var taken = 'taken';
         var $seat = $(seat);
-        
-        $.get('/update/row/'+row+'/col/'+col+'/mark/'+ ( $seat.hasClass('filled') ? 'nottaken' : 'taken' )+'/', updateFromServer);
+		var value = null;
+        if ( $seat.hasClass('filled') ) {
+			value = 'nottaken'; 
+		} else {
+			value = 'taken';
+		}
+ 
+        $.get('/update/row/'+row+'/col/'+col+'/mark/'+ value +'/', updateFromServer);
 	
 	};
 
