@@ -53,7 +53,7 @@ class Main
 
   get "/update/row/:row/col/:col/mark/:taken[/]?" do
     seat = Seat.first(:row => params[:row], :col => params[:col])
-    seat.update(:taken => (params[:taken] == 'taken'), :updated => Time.now)
+    seat.update(:taken => (params[:taken] != 'nottaken'), :twitter => params[:taken], :updated => Time.now)
     if seat.save then
       #redirect '/'
       "#{seat.taken}"
