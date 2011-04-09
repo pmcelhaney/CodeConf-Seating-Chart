@@ -24,3 +24,4 @@ content_for2 https://github.com/Undev/sinatra-content-for2.git
 json https://github.com/flori/json.git
 tilt https://github.com/rtomayko/tilt/
 addressable https://github.com/sporkmonger/addressable.git
+data_objects https://github.com/datamapper/do
