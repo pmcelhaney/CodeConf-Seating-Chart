@@ -9,12 +9,12 @@ $(function () {
         var $seat = $(seat);
         if( $seat.hasClass('filled') ){
             taken = 'nottaken';
-            $seat.removeClass('filled');
         } else {
             taken = 'taken';
-            $seat.addClass('filled');
         }
         $.get('/update/row/'+row+'/col/'+col+'/mark/'+taken+'/');
+		updateFromServer();
+		
 	};
 
 	var rows = 17;
@@ -59,10 +59,13 @@ $(function () {
 	};
 	console.log(JSON.stringify(data));
 
-
-	setInterval( function () {
+	var updateFromServer = function () {
 		$.getJSON('/seats.json', function (d) { data = d; displayData(d); });
-	}, 1000);
+	};
+	
+	
+	updateFromServer();
+	setInterval( updateFromServer, 10000);
 
 
 
