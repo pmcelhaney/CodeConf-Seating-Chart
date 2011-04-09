@@ -37,14 +37,19 @@ $(function () {
 	var displayData = function (data) {
 		console.log('receiving update');
 		var i, j;
-
+		var td;
 		for (i = 0; i < rows; i++) {
 			tr = $('<tr></tr>');
 			for (j = 0; j < cols; j++) {
+				td = $('table tr').eq(i).find('td').eq(j);
 				if (data[i][j]) {
-					$('table tr').eq(i).find('td').eq(j).addClass('filled');
+					td.addClass('filled');
+					if (td.find('img').length === 0) {
+						td.append('<img>');
+					}
+					td.find('img').attr('src', 'https://api.twitter.com/1/users/profile_image/' + data[i][j]);	
 				} else {
-					$('table tr').eq(i).find('td').eq(j).removeClass('filled');
+					td.removeClass('filled').find('img').remove();
 				}
 			}
 
