@@ -1,9 +1,0 @@
-.DS_Store
-*.log
-./doc
-./cov
-build
-dist
-lib/*.jar
-lib/do_jdbc/*.jar
-pkg/*
