@@ -1,3 +1,4 @@
 sinatra
+tilt
 data_mapper
 dm-sqlite-adapter
