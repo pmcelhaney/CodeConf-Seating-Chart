@@ -27,7 +27,7 @@ class Main < Monk::Glue
   set :app_file, __FILE__
   use Rack::Session::Cookie,
                       :key => 'rack.session',
-                      :domain => 'foo.com',
+                      :domain => 'codeconf.com',
                       :path => '/',
                       :expire_after => 2592000,
                       :secret => 'fWQjDWlJTbcC4N59'

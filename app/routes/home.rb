@@ -22,12 +22,12 @@ class Main
           :created => Time.now
         )
 
-        if s.save then
-
-        end
+        s.save
 
       end
     end
+
+    redirect '/'
 
   end
 
@@ -53,7 +53,7 @@ class Main
 
   get "/update/row/:row/col/:col/mark/:taken[/]?" do
     seat = Seat.first(:row => params[:row], :col => params[:col])
-    seat.update(:taken => (params[:taken] == 'taken'))
+    seat.update(:taken => (params[:taken] == 'taken'), :updated => Time.now)
     if seat.save then
       #redirect '/'
       "#{seat.taken}"

@@ -18,20 +18,13 @@ $(function () {
 
 	var markSeat = function(seat, row, col) {
 		data[row][col] = 'x';
-		var taken = 'taken';
+		//console.log(data);
+		//console.log('you clicked ' + row + ',' + col);
         var $seat = $(seat);
-		var value = null;
-        if ( $seat.hasClass('filled') ) {
-			value = 'nottaken'; 
-		} else {
-			value = 'taken';
-		}
- 		
-		$('#mark-seat-form input[name=row]').val(row);
-		$('#mark-seat-form input[name=col]').val(col);
-		$('#mark-seat-form').slideDown();
-
-       
+        var url = '/update/row/'+row+'/col/'+col+'/mark/'+ ( $seat.hasClass('filled') ? 'taken' : 'nottaken' )+'/';
+        console.log(url);
+        $.get(url, updateFromServer);
+	
 	};
 
 	var rows = 17;
@@ -60,7 +53,7 @@ $(function () {
 
 
 	var displayData = function (data) {
-		console.log('receiving update');
+		//console.log('receiving update');
 		var i, j;
 		var td;
 		for (i = 0; i < rows; i++) {
@@ -82,14 +75,13 @@ $(function () {
 	};
 
 	var updateFromServer = function () {
-		console.log('asking server for update');
-		
+		//console.log('asking server for update');
 		$.getJSON('/seats.json', function (d) { data = d; displayData(d); });
 	};
 	
 	
 	updateFromServer();
-	//setInterval( updateFromServer, 10000);
+	setInterval( updateFromServer, 10000);
 
 
 
