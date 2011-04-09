@@ -1,0 +1,20 @@
+require 'pathname'
+require 'rake'
+require 'rake/clean'
+
+ROOT = Pathname(__FILE__).dirname.expand_path
+
+require ROOT + 'lib/data_objects/version'
+
+JRUBY    = RUBY_PLATFORM =~ /java/
+IRONRUBY = defined?(RUBY_ENGINE) && RUBY_ENGINE == 'ironruby'
+WINDOWS  = Gem.win_platform? || (JRUBY && ENV_JAVA['os.name'] =~ /windows/i)
+SUDO     = WINDOWS ? '' : ('sudo' unless ENV['SUDOLESS'])
+
+CLEAN.include(%w[ pkg/ **/*.rbc ])
+
+
+Rake::Task['build'].clear_actions if Rake::Task.task_defined?('build')
+task :build => [ :java, :gem ]
+
+FileList['tasks/**/*.rake'].each { |task| import task }

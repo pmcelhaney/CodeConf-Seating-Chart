@@ -1,0 +1,88 @@
+# Apache Buildr buildfile for jdbc_drivers
+#
+# tasks to help download and keep various driver Maven artefacts up-to-date
+# see http://incubator.apache.org/buildr/ for more information on Apache Buildr
+require 'buildr'
+require 'pathname'
+
+dir = Pathname(__FILE__).dirname.expand_path
+derby_dir    =  dir / 'derby'    / 'lib'
+h2_dir       =  dir / 'h2'       / 'lib'
+hsqldb_dir   =  dir / 'hsqldb'   / 'lib'
+mysql_dir    =  dir / 'mysql'    / 'lib'
+postgres_dir =  dir / 'postgres' / 'lib'
+sqlite3_dir  =  dir / 'sqlite3'  / 'lib'
+sqlserver_dir =  dir / 'sqlserver' / 'lib'
+
+# get the version of each of the JDBC Drivers
+require derby_dir     / 'do_jdbc' / 'derby_version'
+require h2_dir        / 'do_jdbc' / 'h2_version'
+require hsqldb_dir    / 'do_jdbc' / 'hsqldb_version'
+require mysql_dir     / 'do_jdbc' / 'mysql_version'
+require postgres_dir  / 'do_jdbc' / 'postgres_version'
+require sqlite3_dir   / 'do_jdbc' / 'sqlite3_version'
+require sqlserver_dir / 'do_jdbc' / 'sqlserver_version'
+
+# define remote repository and artifacts
+repositories.remote << 'http://www.ibiblio.org/maven2/'
+
+DERBY    = {  :group    => 'org.apache.derby',
+              :id       => 'derby',
+              :version  => DataObjects::Jdbc::Derby::VERSION }
+              # TODO: check this includes both client and embedded versions?
+H2       = {  :group    => 'com.h2database',
+              :id       => 'h2',
+              :version  => DataObjects::Jdbc::H2::VERSION }              
+HSQLDB   = {  :group    => 'hsqldb',
+              :id       => 'hsqldb',
+              :version  => DataObjects::Jdbc::HSQLDB::VERSION }
+MYSQL    = {  :group    => 'mysql',
+              :id       => 'mysql-connector-java',
+              :version  => DataObjects::Jdbc::MySQL::VERSION }
+POSTGRES = {  :group    => 'postgresql',
+              :id       => 'postgresql',
+              :version  => DataObjects::Jdbc::Postgres::VERSION + "-603.jdbc3" }
+              # TODO: handle minor vs major versions more elegantly
+SQLITE3  = {  :group    => 'org.xerial',
+              :id       => 'sqlite-jdbc',
+              :version  => DataObjects::Jdbc::SQLite3::VERSION }
+SQLSERVER= {  :group    => 'net.sourceforge.jtds',
+                            :id       => 'jtds',
+                            :version  => DataObjects::Jdbc::SqlServer::VERSION }
+
+# Download the Maven Artifact, and return the Path of the JAR file in the local
+# ~/.m2/repo folder
+#
+# TODO: this could use DRY'ing up and refactoring by someone who knows the
+#       buildr API well
+def download_and_get_path(artifact_hash)
+  artifact(artifact_hash).invoke
+  Artifact.lookup(artifact(artifact_hash).to_hash).to_s
+end
+
+# Copies only if the new file_path does not already exist
+#
+def copy_only_if_not_exist(old_file_path, new_file_path)
+  cp(old_file_path, new_file_path, :preserve => true, :verbose => true) unless File.exists?(new_file_path)
+end
+
+define 'do_jdbc' do
+  task 'update_drivers' do
+    # specify the local path for the driver artifacts
+    derby_file_path     = download_and_get_path(DERBY)
+    h2_file_path        = download_and_get_path(H2)
+    hsqldb_file_path    = download_and_get_path(HSQLDB)
+    mysql_file_path     = download_and_get_path(MYSQL)
+    postgres_file_path  = download_and_get_path(POSTGRES)
+    sqlite_file_path  = download_and_get_path(SQLITE3)
+    sqlserver_file_path  = download_and_get_path(SQLSERVER)
+    
+    copy_only_if_not_exist(derby_file_path,       derby_dir     / DataObjects::Jdbc::Derby::JAR_NAME)
+    copy_only_if_not_exist(h2_file_path,          h2_dir        / DataObjects::Jdbc::H2::JAR_NAME)
+    copy_only_if_not_exist(hsqldb_file_path,      hsqldb_dir    / DataObjects::Jdbc::HSQLDB::JAR_NAME)
+    copy_only_if_not_exist(mysql_file_path,       mysql_dir     / DataObjects::Jdbc::MySQL::JAR_NAME)
+    copy_only_if_not_exist(postgres_file_path,    postgres_dir  / DataObjects::Jdbc::Postgres::JAR_NAME)
+    copy_only_if_not_exist(sqlite_file_path,      sqlite3_dir   / DataObjects::Jdbc::SQLite3::JAR_NAME)
+    copy_only_if_not_exist(sqlserver_file_path,   sqlserver_dir / DataObjects::Jdbc::SqlServer::JAR_NAME)
+  end
+end

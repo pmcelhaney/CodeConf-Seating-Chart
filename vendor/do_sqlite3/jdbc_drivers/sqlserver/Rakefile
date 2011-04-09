@@ -1,0 +1,41 @@
+require 'pathname'
+require 'rubygems'
+require 'rake'
+require 'rake/clean'
+
+ROOT = Pathname(__FILE__).dirname.expand_path
+
+require ROOT + 'lib/do_jdbc/sqlserver_version'
+
+JRUBY   = RUBY_PLATFORM =~ /java/
+WINDOWS = Gem.win_platform? || (JRUBY && ENV_JAVA['os.name'] =~ /windows/i)
+SUDO    = WINDOWS ? '' : ('sudo' unless ENV['SUDOLESS'])
+
+CLEAN.include(%w[ pkg/ *.gem *.gemspec .config ])
+
+warn "SQL Server JDBC (jTDS) Driver is only for use with JRuby" unless RUBY_PLATFORM =~ /java/
+
+begin
+  require 'jeweler'
+
+  Jeweler::Tasks.new do |gem|
+    gem.name        = 'do-jdbc_sqlserver'
+    gem.version     = DataObjects::Jdbc::SqlServer::VERSION
+    gem.summary     = 'SQL Server JDBC (jTDS) Driver'
+    gem.description = 'JDBC Driver for SQL Server (jTDS), packaged as a Gem'
+    gem.platform    = 'java'
+
+    gem.rubyforge_project = 'dorb'
+
+    gem.authors     = ['alin_sinpalean', 'bheineman', 'ickzon']
+    gem.email       = ''
+    gem.homepage    = 'http://jtds.sourceforge.net/'
+  end
+
+  Jeweler::GemcutterTasks.new
+
+  task :default => [ :install ]
+
+rescue LoadError
+  puts 'Jeweler (or a dependency) not available. Install it with: gem install jeweler'
+end
