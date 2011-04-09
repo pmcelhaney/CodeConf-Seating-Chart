@@ -12,7 +12,7 @@ defaults: &defaults
     <<: *defaults
 
 :production:
-  :postgresql:
+  :postgres:
     :database: wykwikptpr
     :port: 5432
     :host: ec2-50-17-202-49.compute-1.amazonaws.com

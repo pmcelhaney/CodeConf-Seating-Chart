@@ -1,4 +1,4 @@
 sinatra
 tilt
 data_mapper
-dm-sqlite-adapter
+dm-postgres-adapter
