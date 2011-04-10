@@ -41,8 +41,12 @@ get "/create" do
   cols = 21
   for i in 0..rows
     for j in 0..cols
-      s = Seat.new( :loc => "seat-#{i}-#{j}", :taken => true, :created => Time.now )
-      s.save
+      seatLoc = "seat-#{i}-#{j}"
+      existingSeats = Seat.first(:loc => seatLoc)
+      if !existingSeats then
+        s = Seat.new( :loc => seatLoc, :taken => true, :created => Time.now )
+        s.save
+      end
     end
   end
   redirect '/'
