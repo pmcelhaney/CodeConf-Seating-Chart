@@ -7,6 +7,17 @@
   Each square represents a seat.
   Click on a square to update the status of that seat.
 
+%table{:id => 'openseats'}
+  %tr
+    %td{:colspan => '21', :class => 'isle'}
+  %tr
+    %td{:colspan => '7', :class => 'isle'}
+    %td{:colspan => '7', :class => 'filled'}
+      Stage
+    %td{:colspan => '7', :class => 'isle'}
+  %tr
+    %td{:colspan => '21', :class => 'isle'}
+
 %form{:id => 'mark-seat-form'}
   %input{:name => 'seat-id', :type => 'hidden'}
 
@@ -24,17 +35,6 @@
   %div
     %button#cancel Cancel
     %button#save Save
-
-%table{:id => 'openseats'}
-  %tr
-    %td{:colspan => '21', :class => 'isle'}
-  %tr
-    %td{:colspan => '7', :class => 'isle'}
-    %td{:colspan => '7', :class => 'filled'}
-      Stage
-    %td{:colspan => '7', :class => 'isle'}
-  %tr
-    %td{:colspan => '21', :class => 'isle'}
 
 - content_for :footer do
   %p
