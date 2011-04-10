@@ -63,4 +63,11 @@ td.selected {
 
 #mark-seat-form { 
 	display: none;
+	color: black;
+	background-color: white;
+	border: 1px solid black;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	padding: 10px;
 }

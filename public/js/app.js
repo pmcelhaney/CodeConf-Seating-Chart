@@ -10,12 +10,14 @@ $(function () {
 		var url = '/update/'+seatId+'/mark/'+ value +'/';
 		$.get(url, updateFromServer);
 		//console.log(url);
-		$('#mark-seat-form').slideUp('slow');
+		$('#mark-seat-form').fadeOut('slow');
+		$('td').removeClass('selected');
 		return false;
 	});
 
     $('#cancel').bind('click', function () {
-		$('#mark-seat-form').slideUp('slow');
+		$('#mark-seat-form').fadeOut('slow');
+		$('td').removeClass('selected');
 		return false;
 	});
 
@@ -23,6 +25,9 @@ $(function () {
 
 		var taken = 'taken';
         var $seat = $(seat);
+		var $form = $('#mark-seat-form');
+		var position = $seat.position();
+		
 		$('td').removeClass('selected');
 		$seat.addClass('selected');
 		var value = null;
@@ -32,9 +37,17 @@ $(function () {
 			value = 'taken';
 		}
 		$('#mark-seat-form input[name=seat-id]').val(seatId);
-		$('#mark-seat-form').slideDown();
-       
+		
+		
+		$form.css({top: position.top + 60, left: leftPosition(position.left, $form.width()) }).fadeIn();
 	};
+	
+	var leftPosition = function (left, width) {
+		var leftBound = 20;
+		var rightBound = $('body').width() - width - 20;
+		return Math.max( Math.min(left - width / 2, rightBound), leftBound);
+	};
+	
 
 	var rows = 17;
 	var cols = 21;
@@ -59,6 +72,8 @@ $(function () {
 
 		$('#openseats').append(tr);
 	}
+
+
 
 
 
