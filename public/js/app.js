@@ -12,6 +12,8 @@ $(function () {
 		var seatId = $('#mark-seat-form input[name=seat-id]').val();
 		if (value === 'twitter') {
 			value = $('#mark-seat-form input[name=twitter-username]').val();
+			old_seat = $('img[title="@' + value + '"]').parent('td');
+			old_seat.removeClass('filled').find('img').remove();
 		}
 		
 		var url = '/update/'+seatId+'/mark/'+ value +'/';
