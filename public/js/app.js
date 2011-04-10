@@ -53,7 +53,7 @@ $(function () {
 		}
 		
 		
-		$form.css({top: position.top + 60, left: leftPosition(position.left, $form.width()) }).fadeIn();
+		$form.css({top: position.top + 55, left: leftPosition(position.left, $form.width()) }).fadeIn();
 	};
 	
 	var leftPosition = function (left, width) {
