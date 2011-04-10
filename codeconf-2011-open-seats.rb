@@ -9,18 +9,6 @@ require 'haml'
 require 'sinatra/content_for2'
 require 'json/pure'
 
-configure :development do
-  DataMapper::Logger.new('tmp/seatr-debug.log', :debug)
-  DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/development.db")
-end
-
-configure :production do
-  # Configure stuff here you'll want to
-  # only be run at Heroku at boot
-
-  # TIP:  You can get you database information
-  #       from ENV['DATABASE_URI'] (see /env route below)
-end
 
 class Seat
   include DataMapper::Resource
@@ -34,11 +22,16 @@ class Seat
 
 end
 
-DataMapper.finalize
-#DataMapper.auto_migrate!
-DataMapper.auto_upgrade!
 
-#=end
+configure do
+  DataMapper::Logger.new('tmp/seatr-debug.log', :debug)
+
+  DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/development.db")
+
+  DataMapper.finalize
+  #DataMapper.auto_migrate!
+  DataMapper.auto_upgrade!
+end
 
 get "/" do
   @seats = Seat.all
