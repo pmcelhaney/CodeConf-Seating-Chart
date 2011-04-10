@@ -1,5 +1,12 @@
 $(function () {
 
+	var closeForm = function () {
+		$('#mark-seat-form').fadeOut('slow');
+		$('td').removeClass('selected');
+			
+	};
+
+
 	$('#save').bind('click', function () {
 		var value = $('#mark-seat-form input[name=status]:checked')[0].value;
 		var seatId = $('#mark-seat-form input[name=seat-id]').val();
@@ -10,14 +17,12 @@ $(function () {
 		var url = '/update/'+seatId+'/mark/'+ value +'/';
 		$.get(url, updateFromServer);
 		//console.log(url);
-		$('#mark-seat-form').fadeOut('slow');
-		$('td').removeClass('selected');
+		closeForm();
 		return false;
 	});
 
     $('#cancel').bind('click', function () {
-		$('#mark-seat-form').fadeOut('slow');
-		$('td').removeClass('selected');
+		closeForm();
 		return false;
 	});
 
@@ -64,7 +69,7 @@ $(function () {
 			if (j === 10) {
 				td.addClass('isle');
 			} else {
-                td.addClass('seat').click( (function (seatId) { return function () { markSeat(this, seatId);  }; }(seatId)) );
+                td.addClass('seat').click( (function (seatId) { return function () { if ( $(this).hasClass('selected') ) { closeForm(); } else { markSeat(this, seatId); }  }; }(seatId)) );
             }
 
 			tr.append(td);
