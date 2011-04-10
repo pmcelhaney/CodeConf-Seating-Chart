@@ -23,13 +23,14 @@ $(function () {
 
 		var taken = 'taken';
         var $seat = $(seat);
+		$('td').removeClass('selected');
+		$seat.addClass('selected');
 		var value = null;
         if ( $seat.hasClass('filled') ) {
 			value = 'nottaken'; 
 		} else {
 			value = 'taken';
 		}
- 		
 		$('#mark-seat-form input[name=seat-id]').val(seatId);
 		$('#mark-seat-form').slideDown();
        

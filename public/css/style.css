@@ -56,6 +56,11 @@ td.seat {
     cursor: pointer;
 }
 
+td.selected {
+	background-color: #999999;
+}
+
+
 #mark-seat-form { 
 	display: none;
 }
