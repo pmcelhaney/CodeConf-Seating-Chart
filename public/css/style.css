@@ -50,6 +50,7 @@ td.filled {
 td.isle {
     background: none;
     width: 60px;
+	color: #999999;
 }
 
 td.seat {

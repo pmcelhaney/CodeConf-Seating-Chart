@@ -77,6 +77,7 @@ $(function () {
 			td = $('<td id="'+seatId+'"></td>');
 			if (j === 10) {
 				td.addClass('isle');
+				td.text(i);
 			} else {
                 td.addClass('seat').click( (function (seatId) { return function () { if ( $(this).hasClass('selected') ) { closeForm(); } else { markSeat(this, seatId); }  }; }(seatId)) );
             }
