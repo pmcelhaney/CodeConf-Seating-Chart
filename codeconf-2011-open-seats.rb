@@ -11,7 +11,7 @@ require 'json/pure'
 
 configure :development do
   DataMapper::Logger.new('tmp/seatr-debug.log', :debug)
-  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/db/development.db")
+  DataMapper::setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/development.db")
 end
 
 configure :production do
