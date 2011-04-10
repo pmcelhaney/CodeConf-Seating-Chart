@@ -134,7 +134,7 @@ $(function () {
 	
 	
 	updateFromServer();
-	setInterval( updateFromServer, 10000);
+	//setInterval( updateFromServer, 10000);
 
 });
 
