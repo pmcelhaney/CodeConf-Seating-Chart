@@ -3,3 +3,6 @@ tilt
 data_mapper
 dm-postgres-adapter
 dm-sqlite-adapter
+haml
+content_for2
+json

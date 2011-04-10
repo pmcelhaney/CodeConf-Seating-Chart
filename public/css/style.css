@@ -1,0 +1,53 @@
+body {
+    background: #111111;
+    color: #ddd;
+    font-family: "Helvetica Neue", Helvetica, Liberation Sans, Arial, sans-serif;
+}
+
+#page {
+    width: 960px;
+    margin: 0 25px;
+}
+
+h1{
+    color: #aaa;
+    text-align: center;
+}
+
+h1 img {
+    width: 72px;
+    height: 72px;
+}
+
+h1 span {
+    font-size: 2em;
+}
+
+td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    background-color: #FF8500;
+}
+
+td img {
+    width: 36px;
+    height: 36px;
+}
+
+td.filled {
+    background-color: #333333;
+}
+
+td.isle {
+    background: none;
+    width: 72px;
+}
+
+td.seat {
+    cursor: pointer;
+}
+
+#mark-seat-form { 
+	display: none;
+}
