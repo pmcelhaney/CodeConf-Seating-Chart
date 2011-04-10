@@ -36,6 +36,16 @@ $(function () {
 		$('td').removeClass('selected');
 		$seat.addClass('selected');
 		$('#mark-seat-form input[name=seat-id]').val(seatId);
+		if ($seat.hasClass('filled')) {
+			if ($seat.find('img').length) {
+				$('#mark-seat-form input[name=status][value=twitter]').attr('checked', 'checked');
+				$('#mark-seat-form input[name=twitter-username]').val($seat.find('img').attr('alt').replace('@', ''));
+			} else {
+				$('#mark-seat-form input[name=status][value=taken]').attr('checked', 'checked');				
+			}
+		} else {
+			$('#mark-seat-form input[name=status][value=open]').attr('checked', 'checked');
+		}
 		
 		
 		$form.css({top: position.top + 60, left: leftPosition(position.left, $form.width()) }).fadeIn();
