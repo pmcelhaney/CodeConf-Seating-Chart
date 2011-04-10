@@ -1,7 +1,6 @@
 $(function () {
 
-	
-	$('#mark-seat-form button').bind('click', function () {
+	$('#save').bind('click', function () {
 		var value = $('#mark-seat-form input[name=status]:checked')[0].value;
 		var seatId = $('#mark-seat-form input[name=seat-id]').val();
 		if (value === 'twitter') {
@@ -10,7 +9,12 @@ $(function () {
 		
 		var url = '/update/'+seatId+'/mark/'+ value +'/';
 		$.get(url, updateFromServer);
-		console.log(url);
+		//console.log(url);
+		$('#mark-seat-form').slideUp('slow');
+		return false;
+	});
+
+    $('#cancel').bind('click', function () {
 		$('#mark-seat-form').slideUp('slow');
 		return false;
 	});
