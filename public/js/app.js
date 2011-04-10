@@ -89,7 +89,9 @@ $(function () {
 			for (j = 0; j < cols; j++) {
                 var seatId = 'seat-'+i+'-'+j;
 				td = $('#'+seatId);
-                //console.log(data[seatId]);
+                //if( seatId == 'seat-0-9' ){
+                    //console.log(data[seatId]);
+                //}
 				if (data[seatId].taken) {
 					td.addClass('filled');
                     if (data[seatId].twitter  && data[seatId].twitter != "taken") {
