@@ -12,6 +12,14 @@ $(function () {
 		var seatId = $('#mark-seat-form input[name=seat-id]').val();
 		if (value === 'twitter') {
 			value = $('#mark-seat-form input[name=twitter-username]').val();
+			// possibly mark old seat as open
+			old_seat = $('img[title="@'+value+'"]').parent('td');
+			old_seatId = old_seat.attr('id');
+			if (old_seatId != undefined) {
+			    old_seat.removeClass('filled').find('img').remove();
+    			var old_seat_url = '/update/'+old_seatId+'/mark/open/';
+    			$.get(old_seat_url);
+			}
 		}
 		
 		var url = '/update/'+seatId+'/mark/'+ value +'/';
