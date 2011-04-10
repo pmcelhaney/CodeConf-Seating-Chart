@@ -67,7 +67,7 @@ $(function () {
                 //console.log(data[seatId]);
 				if (data[seatId].taken) {
 					td.addClass('filled');
-                    if (data[seatId].twitter) {
+                    if (data[seatId].twitter  && data[seatId].twitter != "taken") {
                         if (td.find('img').length === 0) {
                             //console.log(data[seatId].twitter);
                             td.append('<img>');
@@ -98,7 +98,7 @@ $(function () {
 	
 	
 	updateFromServer();
-	//setInterval( updateFromServer, 10000);
+	setInterval( updateFromServer, 10000);
 
 });
 

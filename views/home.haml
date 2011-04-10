@@ -3,6 +3,9 @@
     %img{:src => 'http://codeconf.com/images/layout/logo-secondary.png', :align => 'top'}
     %span pen Seats
 
+%p#instructions
+  Each square represents a seat.
+  Click on a square to update the status of that seat.
 
 %form{:id => 'mark-seat-form'}
   %input{:name => 'seat-id', :type => 'hidden'}
@@ -27,10 +30,14 @@
   %tr
     %td{:colspan => '7', :class => 'isle'}
     %td{:colspan => '7', :class => 'filled'}
-    %td{:colspan => '7', :class => 'isle'}
-  %tr
-    %td{:colspan => '7', :class => 'isle'}
-    %td{:colspan => '7', :class => 'filled'}
+      Stage
     %td{:colspan => '7', :class => 'isle'}
   %tr
     %td{:colspan => '21', :class => 'isle'}
+
+- content_for :footer do
+  %p
+    Hacked at CodeConf 2011 by
+    %a{:href => 'http://twitter.com/patrick_mc'} @patrick_mc
+    &
+    %a{:href => 'http://twitter.com/license_to_il'} @license_to_il
