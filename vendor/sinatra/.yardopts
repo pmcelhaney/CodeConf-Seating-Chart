@@ -1,3 +1,0 @@
---readme README.rdoc
---title 'Sinatra API Documentation'
-'lib/**/*.rb' - '*.rdoc'

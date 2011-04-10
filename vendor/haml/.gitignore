@@ -1,8 +1,0 @@
-/.yardoc
-/coverage
-/doc
-/pkg
-/test/rails
-/.haml
-/site
-*.rbc
