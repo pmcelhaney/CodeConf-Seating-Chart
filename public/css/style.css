@@ -19,6 +19,10 @@
         cursor: pointer;
     }
 
+	td.selected {
+		background-color: #ccc;
+	}
+
 #mark-seat-form { 
 	display: none;
 }

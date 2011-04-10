@@ -1,5 +1,9 @@
 $(function () {
 
+	$('#twitter-username').bind('focus', function () {
+		$('#mark-seat-form input[name=status][value=twitter]').attr('checked', 'checked');
+	});
+	
 	
 	$('#mark-seat-form button').bind('click', function () {
 		var value = $('#mark-seat-form input[name=status]:checked')[0].value;
@@ -13,6 +17,7 @@ $(function () {
 		$.get(url, updateFromServer);
 		console.log(url);
 		$('#mark-seat-form').slideUp('slow');
+		$('td').removeClass('selected');
 		return false;
 	});
 
@@ -30,8 +35,8 @@ $(function () {
 		$('#mark-seat-form input[name=row]').val(row);
 		$('#mark-seat-form input[name=col]').val(col);
 		$('#mark-seat-form').slideDown();
-
-       
+		$('td').removeClass('selected');
+       	$seat.addClass('selected');
 	};
 
 	var rows = 17;
