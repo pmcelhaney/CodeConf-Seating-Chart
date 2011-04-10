@@ -25,6 +25,11 @@ $(function () {
 		closeForm();
 		return false;
 	});
+	
+	$('#twitter-username').bind('focus', function () {
+		$('#mark-seat-form input[name=status][value=twitter]').attr('checked', 'checked');
+	});
+	
 
 	var markSeat = function(seat, seatId) {
 
