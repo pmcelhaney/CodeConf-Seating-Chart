@@ -4,5 +4,5 @@ data_mapper
 dm-postgres-adapter
 dm-sqlite-adapter
 haml
-content_for2
+sinatra-content_for2
 json
