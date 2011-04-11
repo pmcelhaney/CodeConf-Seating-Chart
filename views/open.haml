@@ -1,1 +1,18 @@
-=haml :"shared/jqmobile"
+- content_for :header do
+  %h1
+    = @title
+
+%ul{:data => { :role => "listview", :filter => 'true', :inset => 'true', :theme => 'e'}, :class => 'row-list'}
+  - if @seats.count > 0 then
+    - @seats.each do |seat|
+      %li{:class => 'row'}
+        =seat.loc
+  - else
+    %li{:class => 'row'}
+      %em
+        Sorry, there are no open seats.
+
+
+- content_for :footer do
+  %h4
+    Open Seats app

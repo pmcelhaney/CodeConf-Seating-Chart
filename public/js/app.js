@@ -21,7 +21,7 @@ $(function () {
     			$.get(old_seat_url);
 			}
 		}
-		
+
 		var url = '/update/'+seatId+'/mark/'+ value +'/';
 		$.get(url, updateFromServer);
 		//console.log(url);

@@ -32,6 +32,8 @@ class Seat
   include DataMapper::Resource
   property :id, Serial
   property :loc, String
+  property :row, Integer
+  property :seat, Integer
   property :twitter, String
   property :taken, Boolean, :default => true
   property :created, DateTime
@@ -65,7 +67,13 @@ get "/create" do
         seatLoc = "seat-#{i}-#{j}"
         existingSeats = Seat.first(:loc => seatLoc)
         if !existingSeats then
-          s = Seat.new( :loc => seatLoc, :taken => true, :created => Time.now )
+          s = Seat.new(
+            :loc => seatLoc,
+            :row => i,
+            :seat => j,
+            :taken => true,
+            :created => Time.now
+          )
           s.save
         end
       end
@@ -74,6 +82,12 @@ get "/create" do
   else
     "hmm... let me about that think"
   end
+end
+
+get "/open" do
+  @title = "Open Rows"
+  @seats = Seat.all(:taken => false)
+  haml :open, :layout => :mobile
 end
 
 get "/seats.json" do
