@@ -15,7 +15,7 @@
     %script{:src => "js/jquery-mobile/jquery.mobile-1.0a4.1.min.js", :type => "text/javascript"}
     = yield_content :js
   %body
-    #page-mobile{:data => {:role => 'page', :position => 'inline'}}
+    #page-mobile{:data => {:role => 'page', :position => 'inline', :theme => 'a'}}
       #header{:data => {:role => 'header'}}
         = yield_content :header
       #content{:data => {:role => 'content', :theme => 'a'}}

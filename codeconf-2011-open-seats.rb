@@ -1,12 +1,20 @@
 require 'rubygems'
 require 'sinatra'
+require 'logger'
+require 'haml'
+require 'sinatra/content_for2'
+
+helpers Sinatra::ContentFor2
+
+get '/' do
+  haml :home
+end
+
+=begin
 require 'dm-core'
 require 'dm-migrations'
 require 'dm-migrations'
 require 'dm-timestamps'
-require 'logger'
-require 'haml'
-require 'sinatra/content_for2'
 require 'json/pure'
 
 @saltKey = "@codeconf"
@@ -47,6 +55,8 @@ configure do
   #DataMapper.auto_migrate!
   DataMapper.auto_upgrade!
 end
+
+
 
 get "/" do
   set_cookie()
@@ -122,3 +132,4 @@ get "/update/:loc/mark/:taken[/]?" do
     "really?!"
   end
 end
+=end

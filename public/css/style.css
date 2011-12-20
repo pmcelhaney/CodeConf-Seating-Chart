@@ -27,9 +27,19 @@ h1 span {
     font-size: 2em;
 }
 
-#instructions {
+h2 {
+  text-align: center;
+}
+
+#instructions, #codeconf-2011-open-seats-image {
     text-align: center;
 }
+
+#codeconf-2011-open-seats-image img {
+  border: 10px solid #fff;
+}
+
+/*
 
 td {
     width: 40px;
@@ -79,3 +89,6 @@ td.selected {
 
 span.nub { display: block; width: 250px; height: 10px; background-position: left bottom; background-repeat: no-repeat; position: absolute; top: -10px; left: 212px; z-index: 501; }
 span.nub.cfff { background-image: url(/images/nub-fff.png); }
+
+
+*/

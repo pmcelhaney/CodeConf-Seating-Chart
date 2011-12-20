@@ -1,48 +1,18 @@
 - content_for :header do
   %h1
-    %img{:src => 'http://codeconf.com/images/layout/logo-secondary.png', :align => 'top'}
-    %span pen Seats
+    open seats
+  %h2
+    presented during a lighting talk during CodeConf 2011
 
-%p#instructions
-  Each square represents a seat.
-  Click on a square to update the status of that seat.
-
-%table{:id => 'openseats'}
-  %tr
-    %td{:colspan => '21', :class => 'isle'}
-  %tr
-    %td{:colspan => '7', :class => 'isle'}
-    %td{:colspan => '7', :class => 'filled'}
-      Stage
-    %td{:colspan => '7', :class => 'isle'}
-  %tr
-    %td{:colspan => '21', :class => 'isle'}
-
-%form{:id => 'mark-seat-form'}
-  %input{:name => 'seat-id', :type => 'hidden'}
-
-  %div
-    %input{:name => 'status', :value => 'open', :type => 'radio', :id => 'seat-is-open', :checked => 'checked'}
-    %label{:for => 'seat-is-open'} This seat is open.
-  %div
-    %input{:name => 'status', :value => 'taken', :type => 'radio', :id => 'seat-is-taken'}
-    %label{:for => 'seat-is-taken'} This seat is taken.
-  %div
-    %input{:name => 'status', :value => 'twitter', :type => 'radio', :id => 'seat-is-me'}
-    %label{:for => 'seat-is-me'} This seat is me!
-    %label{:for => 'twitter-username'} Twitter username:
-    %input{:type => 'text', :id => 'twitter-username', :name => 'twitter-username'}
-  %div
-    %button#cancel Cancel
-    %button#save Save
-  %span{:class => 'nub cfff'}
+#codeconf-2011-open-seats-image
+  %img{:src=>"/images/codeconf-2011-open-seats.png"}
 
 - content_for :footer do
   %p
     Hacked at CodeConf 2011 by
     %a{:href => 'http://twitter.com/patrick_mc'} @patrick_mc
     &
-    %a{:href => 'http://twitter.com/license_to_il'} @license_to_il
+    %a{:href => 'http://twitter.com/licensetoil'} @licensetoil
     %br>
     Fork repo:
     %a{:href => 'https://github.com/pmcelhaney/CodeConf-Seating-Chart'} CodeConf-Seating-Chart on Github.

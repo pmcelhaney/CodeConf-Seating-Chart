@@ -1,0 +1,8 @@
+production: 
+  encoding: unicode
+  adapter: postgresql
+  username: tabkfejcbx
+  port: 5432
+  host: ec2-50-17-214-248.compute-1.amazonaws.com
+  database: tabkfejcbx
+  password: VVKiTnLso-4cRXV0vgUK
